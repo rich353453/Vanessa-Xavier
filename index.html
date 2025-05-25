@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolo Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-top">
+                <div class="location">
+                    <span class="location-label">Localização</span>
+                    <span class="location-value">São Paulo, Brasil ▼</span>
+                </div>
+                <div class="header-icons">
+                    <button class="header-btn"><i class="ri-shopping-cart-2-line"></i></button>
+                    <button class="header-btn"><i class="ri-user-3-line"></i></button>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar bolos, sabores...">
+                <button class="search-btn"><i class="ri-search-line"></i></button>
+            </div>
+        </header>
+        <main>
+            <section class="special-offer">
+                <div class="offer-banner">
+                    <div class="offer-info">
+                        <span class="offer-title">Oferta Especial</span>
+                        <span class="offer-desc">Até 40% OFF em bolos selecionados!</span>
+                        <button class="offer-btn">Ver Ofertas</button>
+                    </div>
+                    <img class="offer-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Oferta de Bolo">
+                </div>
+            </section>
+            <section class="categories">
+                <h2 class="section-title">Categorias <span class="view-all">ver todos</span></h2>
+                <div class="categories-circular">
+                    <div class="category-circle active">
+                        <span class="category-icon">🍫</span>
+                        <span class="category-label">Chocolate</span>
+                    </div>
+                    <div class="category-circle">
+                        <span class="category-icon">🍓</span>
+                        <span class="category-label">Morango</span>
+                    </div>
+                    <div class="category-circle">
+                        <span class="category-icon">🥕</span>
+                        <span class="category-label">Cenoura</span>
+                    </div>
+                    <div class="category-circle">
+                        <span class="category-icon">🧁</span>
+                        <span class="category-label">Red Velvet</span>
+                    </div>
+                </div>
+            </section>
+            <section class="products-list">
+                <h2 class="section-title">Destaques <span class="view-all">ver todos</span></h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <button class="favorite"><i class="ri-heart-line"></i></button>
+                        <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Bolo de Chocolate">
+                        <h3>Bolo de Chocolate</h3>
+                        <div class="product-info">
+                            <span class="price">R$ 30,00</span>
+                            <span class="rating"><span class="star">★</span> 4.8</span>
+                        </div>
+                        <button class="buy">Comprar</button>
+                    </div>
+                    <div class="product-card">
+                        <button class="favorite"><i class="ri-heart-line"></i></button>
+                        <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=400&q=80" alt="Bolo de Morango">
+                        <h3>Bolo de Morango</h3>
+                        <div class="product-info">
+                            <span class="price">R$ 35,00</span>
+                            <span class="rating"><span class="star">★</span> 4.7</span>
+                        </div>
+                        <button class="buy">Comprar</button>
+                    </div>
+                    <div class="product-card">
+                        <button class="favorite"><i class="ri-heart-line"></i></button>
+                        <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80" alt="Bolo de Cenoura">
+                        <h3>Bolo de Cenoura</h3>
+                        <div class="product-info">
+                            <span class="price">R$ 25,00</span>
+                            <span class="rating"><span class="star">★</span> 4.6</span>
+                        </div>
+                        <button class="buy">Comprar</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-btn active"><i class="ri-home-5-line nav-icon"></i><span class="nav-label">Home</span></button>
+            <button class="nav-btn"><i class="ri-shopping-bag-3-line nav-icon"></i><span class="nav-label">Pedidos</span></button>
+            <button class="nav-btn"><i class="ri-heart-line nav-icon"></i><span class="nav-label">Favoritos</span></button>
+            <button class="nav-btn"><i class="ri-chat-3-line nav-icon"></i><span class="nav-label">Chat</span></button>
+            <button class="nav-btn"><i class="ri-user-3-line nav-icon"></i><span class="nav-label">Perfil</span></button>
+        </nav>
+    </div>
+    <a href="https://wa.me/5511973425461" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp">
+        <i class="ri-whatsapp-line wa-icon"></i>
+    </a>
+    <script src="script.js"></script>
+</body>
+</html> 
