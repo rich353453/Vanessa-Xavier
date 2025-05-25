@@ -38,10 +38,13 @@ let pedidos = [];
 let categoriaAtiva = '';
 
 const categorias = [
-  { nome: 'Chocolate', imagem: 'chocolate.jpg' },
-  { nome: 'Morango', imagem: 'morango.jpg' },
-  { nome: 'Cenoura', imagem: 'cenoura.jpg' },
-  { nome: 'Red Velvet', imagem: 'redvelvet.jpg' },
+  { nome: 'Chocolate', imagem: '1.png' },
+  { nome: 'Morango', imagem: '2.png' },
+  { nome: 'Cenoura', imagem: '3.png' },
+  { nome: 'Red Velvet', imagem: '4.png' },
+  { nome: 'Prestígio', imagem: '5.png' },
+  { nome: 'Limão', imagem: '6.png' },
+  { nome: 'Coco', imagem: '7.png' },
 ];
 
 function renderCategorias() {
@@ -51,7 +54,7 @@ function renderCategorias() {
     const card = document.createElement('div');
     card.className = 'category-card' + (cat.nome === categoriaAtiva ? ' active' : '');
     card.innerHTML = `
-      <img src="${cat.imagem}" class="category-card-img" alt="${cat.nome}">
+      <img src="${cat.imagem}" class="category-card-img" alt="${cat.nome}" onerror="this.onerror=null;this.src='fallback.png';">
       <span class="category-card-label">${cat.nome}</span>
     `;
     card.onclick = function() {
@@ -114,12 +117,40 @@ function abrirModal(idx) {
 document.querySelector('.close-modal').onclick = () => modal.style.display = 'none';
 modal.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
 
+// Fechar modal ao pressionar ESC
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    modal.style.display = 'none';
+  }
+});
+
+// Feedback visual ao adicionar/remover pedidos
+function feedback(msg, cor = '#8d5c2c') {
+  let el = document.createElement('div');
+  el.textContent = msg;
+  el.style.position = 'fixed';
+  el.style.bottom = '90px';
+  el.style.left = '50%';
+  el.style.transform = 'translateX(-50%)';
+  el.style.background = cor;
+  el.style.color = '#fff';
+  el.style.padding = '1rem 2rem';
+  el.style.borderRadius = '1.2rem';
+  el.style.fontWeight = 'bold';
+  el.style.fontSize = '1.1rem';
+  el.style.zIndex = 99999;
+  el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.13)';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1200);
+}
+
 document.querySelector('.add-to-cart').onclick = () => {
   const kg = parseFloat(document.getElementById('modal-kg-input').value);
-  if (!kg || kg < 0.5) return alert('Selecione uma quantidade válida (mínimo 0,5kg)');
+  if (!kg || kg < 0.5) return feedback('Selecione uma quantidade válida (mínimo 0,5kg)', '#ea1d2c');
   pedidos.push({ ...produtoAtual, kg });
   modal.style.display = 'none';
-  alert('Produto adicionado ao pedido!');
+  feedback('Produto adicionado ao pedido!');
+  if (document.getElementById('orders-list').style.display === 'block') renderPedidos();
 };
 
 // Inicialização
@@ -131,6 +162,22 @@ function renderPedidos() {
   container.innerHTML = '<h2>Meus Pedidos</h2>';
   if (pedidos.length === 0) {
     container.innerHTML += '<div class="orders-empty">Nenhum pedido adicionado ainda.</div>';
+    // Botão voltar e limpar
+    const btnBack = document.createElement('button');
+    btnBack.className = 'finalize-order';
+    btnBack.style.background = '#8d5c2c';
+    btnBack.innerHTML = '<i class="ri-arrow-left-line"></i> Voltar para Home';
+    btnBack.onclick = () => {
+      pedidos = [];
+      categoriaAtiva = '';
+      renderCategorias();
+      filtrarProdutos();
+      document.querySelector('.products-list').style.display = 'block';
+      document.getElementById('orders-list').style.display = 'none';
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.nav-btn').classList.add('active');
+    };
+    container.appendChild(btnBack);
     return;
   }
   pedidos.forEach((pedido, idx) => {
@@ -148,6 +195,7 @@ function renderPedidos() {
     card.querySelector('.remove-order').onclick = () => {
       pedidos.splice(idx, 1);
       renderPedidos();
+      feedback('Pedido removido!', '#ea1d2c');
     };
     container.appendChild(card);
   });
@@ -156,6 +204,22 @@ function renderPedidos() {
   btn.innerHTML = '<i class="ri-whatsapp-line"></i> Finalizar Pedido no WhatsApp';
   btn.onclick = finalizarPedido;
   container.appendChild(btn);
+  // Botão voltar e limpar
+  const btnBack = document.createElement('button');
+  btnBack.className = 'finalize-order';
+  btnBack.style.background = '#8d5c2c';
+  btnBack.innerHTML = '<i class="ri-arrow-left-line"></i> Voltar e Limpar';
+  btnBack.onclick = () => {
+    pedidos = [];
+    categoriaAtiva = '';
+    renderCategorias();
+    filtrarProdutos();
+    document.querySelector('.products-list').style.display = 'block';
+    document.getElementById('orders-list').style.display = 'none';
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.nav-btn').classList.add('active');
+  };
+  container.appendChild(btnBack);
 }
 
 function finalizarPedido() {
@@ -187,16 +251,5 @@ navBtns.forEach((btn, idx) => {
     }
   };
 });
-
-// Atualizar pedidos ao adicionar
-const oldAddToCart = document.querySelector('.add-to-cart').onclick;
-document.querySelector('.add-to-cart').onclick = () => {
-  const kg = parseFloat(document.getElementById('modal-kg-input').value);
-  if (!kg || kg < 0.5) return alert('Selecione uma quantidade válida (mínimo 0,5kg)');
-  pedidos.push({ ...produtoAtual, kg });
-  modal.style.display = 'none';
-  alert('Produto adicionado ao pedido!');
-  if (document.getElementById('orders-list').style.display === 'block') renderPedidos();
-};
 
 // TODO: Implementar aba Pedidos, integração WhatsApp, navegação entre abas, etc. 
