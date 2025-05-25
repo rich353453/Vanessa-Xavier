@@ -38,13 +38,13 @@ let pedidos = [];
 let categoriaAtiva = '';
 
 const categorias = [
-  { nome: 'Chocolate', imagem: '1.png' },
-  { nome: 'Morango', imagem: '2.png' },
-  { nome: 'Cenoura', imagem: '3.png' },
-  { nome: 'Red Velvet', imagem: '4.png' },
-  { nome: 'Prestígio', imagem: '5.png' },
-  { nome: 'Limão', imagem: '6.png' },
-  { nome: 'Coco', imagem: '7.png' },
+  { nome: 'Chocolate', imagem: '1.jpg' },
+  { nome: 'Morango', imagem: '2.jpg' },
+  { nome: 'Cenoura', imagem: '3.jpg' },
+  { nome: 'Red Velvet', imagem: '4.jpg' },
+  { nome: 'Prestígio', imagem: '5.jpg' },
+  { nome: 'Limão', imagem: '6.jpg' },
+  { nome: 'Coco', imagem: '7.jpg' },
 ];
 
 function renderCategorias() {
@@ -54,7 +54,7 @@ function renderCategorias() {
     const card = document.createElement('div');
     card.className = 'category-card' + (cat.nome === categoriaAtiva ? ' active' : '');
     card.innerHTML = `
-      <img src="${cat.imagem}" class="category-card-img" alt="${cat.nome}" onerror="this.onerror=null;this.src='fallback.png';">
+      <img src="${cat.imagem}" class="category-card-img" alt="${cat.nome}" onerror="this.onerror=null;this.classList.add('fallback');this.src='';this.alt='${cat.nome[0]}';this.parentNode.querySelector('.category-card-img').outerHTML='<div class=\'category-card-img fallback\'>${cat.nome[0]}</div>'">
       <span class="category-card-label">${cat.nome}</span>
     `;
     card.onclick = function() {
@@ -140,6 +140,7 @@ function feedback(msg, cor = '#8d5c2c') {
   el.style.fontSize = '1.1rem';
   el.style.zIndex = 99999;
   el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.13)';
+  el.className = 'feedback-fade';
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 1200);
 }
