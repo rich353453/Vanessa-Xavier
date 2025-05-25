@@ -253,4 +253,10 @@ navBtns.forEach((btn, idx) => {
   };
 });
 
-// TODO: Implementar aba Pedidos, integração WhatsApp, navegação entre abas, etc. 
+// TODO: Implementar aba Pedidos, integração WhatsApp, navegação entre abas, etc.
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js');
+  });
+} 
