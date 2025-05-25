@@ -1,0 +1,22 @@
+{
+  "name": "Bolos da Vanessa Xavier",
+  "short_name": "Bolos",
+  "description": "Loja de bolos artesanais da Vanessa Xavier.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8f6f3",
+  "theme_color": "#8d5c2c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 
